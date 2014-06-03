@@ -1,0 +1,352 @@
+\documentclass[12pt, %font size
+               a4paper, %paper type
+               twoside, % two sided printing
+               openright, % start new chapter on right side only ( inserts blank pages )
+               abstract=on, % Use an abstract
+               DIV=11,      % This parameter organizes the borders (detailed explanation at http://texdoc.net/texmf-dist/doc/latex/koma-script/scrguide.pdf
+               BCOR=8mm]{scrbook} % BCOR sets the space, used by the type of  book. (e.g. glued, hard cover..)
+%scrreprt is used for larger texts with chapters (Master or Bachelor Thesis)
+%scrartcl is used when there are no chapters ( for smaller paper)
+
+
+\usepackage[latin1]{inputenc} % enables unicode support for windows
+\usepackage[english]{babel} % sets up new english typography reform
+\usepackage{csquotes} % babel demands it
+\usepackage[unicode=true]{hyperref} % enables use of metadata for pdfs and hyperlinks within a document
+\usepackage[natbib,maxnames=2,maxbibnames=100,style=authoryear-comp,uniquename=full,firstinits,doi=false,backend=biber,backref,hyperref]{biblatex} % advanced bibliography support
+\usepackage[usenames,dvipsnames,hyperref]{xcolor} % enables more advanced color support for hyperref
+\hypersetup{colorlinks=true, %flag for prints
+                        hidelinks,  % this option would hide links for the print version of your thesis
+			linkcolor=red!35!black,    %definition of the link color
+			citecolor=green!35!black,  %definition of the cite color
+			urlcolor=magenta!35!black, %definition of the url color
+			pdfauthor=Tobias Hartmann, % Optional: Specify the author of the pdf
+			pdftitle= Basic Latex template}      % Optional: Specify the title within the pdf
+\usepackage{subfiles} %This package is used for subfiles
+\usepackage{tabu}     % provides advanced tables
+ \usepackage{array,multirow}
+\bibliography{bibFiles/relatedWork.bib}% Include all the bibliography files
+\usepackage{booktabs} % enables reference bookstyle tables
+\usepackage[format=plain, labelfont=bf]{caption}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usepackage{subcaption} % enables use multiple figures in a figure
+\captionsetup{compatibility=false}
+\usepackage{eurosym} %includes the euro symbol 
+\usepackage{enumitem} % allows customization of enumeration and itemize environment
+\usepackage{graphicx} % enables loading of graphics
+\usepackage{tikz} % drawing vector graphics in latex
+%\usepackage{parskip} %alternatively parskip replaces paragraph indentation by increased in-betweeen-paragraph linespacing 
+\usepackage{setspace} % helps setup line spacing
+%\onehalfspacing % increases linespacing to one and half
+\usepackage{placeins} % provides FloatBarrier
+%\usepackage[miktex]{gnuplottex} % gnuplot within latex. May be obsolete with pylab.
+\usepackage[ruled,vlined]{algorithm2e} %algorithm package
+\linespread{1.1} % Definition of the linespread
+\usepackage[tbtags]{mathtools}
+\DeclareMathOperator*{\argmax}{arg\,max} %argmax command
+
+%tikz helps to draw nice pictures with a lot of effort for advanced users
+\usetikzlibrary{positioning,shapes,shadows,arrows, backgrounds}
+\usepackage{verbatim}
+\usepackage{tikz-3dplot}
+
+
+%some definitions for the cref package
+\crefname{algocf}{Algorithm}{Algorithms}
+\crefname{table}{Table}{Tables}
+\crefname{chapter}{Chapter}{Chapters}
+\crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+
+
+\tikzset{
+    tri/.style={
+        draw,
+        shape border rotate=90,
+        isosceles triangle,
+        isosceles triangle apex angle=60,
+        node distance=1cm,
+        minimum height=4em
+    }
+}
+
+
+
+\begin{document}
+\frontmatter
+
+\begin{titlepage}
+\begin{center}
+
+% Upper part of the page. The '~' is needed because \\
+% only works if a paragraph has started.
+\includegraphics{logo2}\\[1cm]
+
+\textsc{\LARGE Rheinische\\[5mm] Friedrich-Wilhelms-Universität Bonn}\\[1.5cm]
+
+\textsc{\Large Master thesis}\\[1.5cm]
+
+% Title
+{ \Large \bfseries Basic \LaTeX \, Template }\\[1.4cm]
+
+% Author and supervisor
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Max \textsc{Mustermann}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{flushright} \large
+\emph{First Examiner:} \\
+Prof.~Dr.~given name \textsc{name} \\[0.5cm]
+\emph{Second Examiner:} \\
+Prof.~Dr.~given name.~\textsc{name} \\[0.5cm]
+
+\emph{Advisor:} \\
+given name \textsc{name} \\[0.5cm]
+%\emph{Abteilung:} \\
+%Autonome Intelligente Systeme
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large Submitted:\hspace{1cm} \today}
+
+\end{center}
+\end{titlepage}
+
+\pagestyle{headings}  % switches on printing of running heads
+\title{Basic \LaTeX \, Template}
+%\subtitle{Master thesis}
+\author{Tobias Hartmann\\ \begin{minipage}{8cm}\centering \small Friedrich-Wilhelms-Universität Bonn\\ \small (group)\end{minipage}}
+
+\vspace{4cm}
+
+\cleardoublepage
+\thispagestyle{empty}
+{\noindent%
+\huge{\textbf{\textsf{Declaration of Authorship}}}
+}
+\vspace{2cm}
+\begin{flushleft}
+\noindent%
+I declare that the work presented here is original and the result of my own investigations.
+Formulations and ideas taken from other sources are cited as such.
+
+It has not been submitted, either in part or whole, for a degree at this or any other university.
+\end{flushleft}
+
+\vspace{8cm}
+\noindent%
+\rule[1em]{8em}{0.5pt}  \hfill \rule[1em]{8em}{0.5pt}\\ % This prints a line to write the date
+Location, Date \hfill Signature\\
+
+
+\cleardoublepage
+
+
+\chapter*{Abstract}
+\thispagestyle{empty}
+Describe your approach and results within the abstract.
+
+
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents
+\listoffigures
+\listofalgorithms
+
+\newpage
+%\setcounter{page}{1}
+%\pagenumbering{arabic}
+\mainmatter
+\subfile{subfiles/Introduction/Introduction}
+
+\chapter{Methods you should probably use}
+In general the DIV option should be used for specification of borders.
+It allows a correct typography of the document.
+The geometry package should be avoided whenever possible.
+
+\section{Table of Contents}
+Within the table of contents page numbering usually is in roman letters.
+Afterwards the introduction should start with page number one in arabic letters.
+The document class scrbook does this by default, when frontmatter, mainmatter and backmatter are defined.
+Therefore, you should insert the \textbackslash frontmatter command before your table of contents, the \textbackslash mainmatter command before your introduction 
+and finally the \textbackslash backmatter command before your appendix or bibliography.
+Please have a look at the source code of this document, all packages are explained within the comments.
+
+
+\section{Indentation}
+Sometimes the indentation of latex at first feels odd.
+Anyway if you have a look at some books, you will find that mostly a new paragraph is marked by indentation, instead of usage of an empty line.
+
+Therefore, the indentation at the begin of this line is a desired effect.
+
+\section{Referencing}
+Use the cleverrev package to reference \cref{chap:Introduction}.
+The package allows to specify the reference style globally.
+Therefore, it helps to refer in a consistent way.
+Otherwise you may quickly have both way of references e.g. Figure and figure, since it must be written manually.
+
+\section{Citations}
+There are two ways to cite:
+\begin{itemize}
+\item \citet{muster} showed that ...
+\item This is currently a hot research topic \citep{muster}
+\end{itemize}
+In your bibliography, you should use strings, using the @string syntax.
+Otherwise you might quickly end up with a lot of different names for the same conference, which causes misleading information.
+(Please have a look at the bibliography file.)
+
+\section{Enumerations}
+For enumerations the package enumitem should be used since it allows for much more customization then the basic enumeration.
+An example from the documentation is given below.
+
+
+A ``normal'' enumerate list with changed counter.
+\begin{enumerate}[label=\alph*)]
+	\item Test 1
+	\item Test 2
+	\item Test 3
+		\begin{enumerate}[label=\arabic*)]
+			\item Test 3.1
+			\item Test 3.2
+			\item Test 3.3
+				\begin{enumerate}[label=\Roman*)]
+					\item Test 3.3.1
+					\item Test 3.3.2
+					\item Test 3.3.3
+				\end{enumerate}
+		\end{enumerate}
+\end{enumerate}
+
+Another list where the indentation was removed.
+\begin{enumerate}[leftmargin=0em, label=\alph*)]
+	\item Test 1
+	\item Test 2
+	\item Test 3
+		\begin{enumerate}[label=\arabic*)]
+			\item Test 3.1
+			\item Test 3.2
+			\item Test 3.3
+				\begin{enumerate}[label=\Roman*)]
+					\item Test 3.3.1
+					\item Test 3.3.2
+					\item Test 3.3.3
+				\end{enumerate}
+		\end{enumerate}
+\end{enumerate}
+
+
+\section{Figures}
+An example figure of nyan cats is given in \cref{fig:cats}.
+It is a basic example how to use use sub figures.
+Please note that you should provide a short name for every figure in these braces: $[$ $]$.
+The short name is displayed within the table of figures, where no detailed explanation is suitable.
+If you do not define a short name, the whole text of the caption will be displayed.
+The example algorithm below provides a bad example, where the short name should be specified but is not.
+You can use the FloatBarrier command if you want to make sure that a figure is within a specific section.
+
+In general there should be no forced line brake within a caption!
+
+\begin{figure}
+          \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{img/cat.jpeg}
+                \caption{Nyan cat}
+                \label{fig:cat1}
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{img/cat.jpeg}
+                \caption{Nyan cat}
+                \label{fig:cat2} 
+        \end{subfigure}
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{img/cat.jpeg}
+                \caption{Nyan cat}
+                \label{fig:cat3}  
+        \end{subfigure}
+	\caption[Nyan cats]{Pictures of Nyan cats}\label{fig:cats}
+\end{figure}
+
+
+\FloatBarrier
+
+\section{Tables}
+In general there should be no vertical lines within tables.
+One package for tables is the booktabs package.
+Many examples can be found in the web.
+A basic example, taken from the booktabs documentation, is given in \cref{tab::ex}.
+
+\begin{table}
+\centering
+	\begin{tabular}{lrr} 
+	\toprule
+	\multicolumn{2}{c}{Studium}\\ \cmidrule{1-2}
+	Fach & Dauer & Einkommen (\euro)\\ 
+	\midrule 
+	Info & 2 & 12,75 \\ \addlinespace
+	MST & 6 & 8,20 \\ \addlinespace
+	VWL & 14 & 10,00\\ 
+	\bottomrule
+\end{tabular}
+\caption[Table Example]{A basic example from the booktabs package.}
+\label{tab::ex}
+\end{table}
+\FloatBarrier
+
+\subsection{The tabu package}
+The tabu package provides some useful tools for advanced tables.
+
+
+
+\section{Algorithms}
+There are several packages for algorithms.
+A nice one is the algorithm 2e package.
+In \cref{alg:exp} a simple example from the algorithm2e documentation is given.
+
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwData{this text}
+	\KwResult{how to write algorithm with \LaTeX2e }
+	initialization\;
+	\While{not at end of this document}{
+		read current\;
+		\eIf{understand}{
+			go to next section\;
+			current section becomes this one\;
+		}{
+			go back to the beginning of current section\;
+		}
+	}
+	\caption{How to write algorithms (Small example from the algorithm2e documentation)}
+	\label{alg:exp}
+\end{algorithm}
+\FloatBarrier
+
+\section{Compiling The Document}
+You have to compile the document in three steps:
+\begin{itemize}
+	\item Compile the document using xelatex: xelatex Template.tex
+ \item Run biber to set up bibliography: biber Template
+ \item Run xelatex again and get the final document: Xelatex Template.tex
+\end{itemize}
+
+\backmatter
+
+\begin{singlespacing}
+\printbibliography
+\end{singlespacing}
+\FloatBarrier
+
+\end{document}
+
